@@ -214,3 +214,24 @@ class _AgriCalcMainScreenState extends State<AgriCalcMainScreen> {
                             }).toList(),
                           ),
                         ),
+                         const SizedBox(height: 32),
+                        
+                        // Main Content Area (Dynamic based on state)
+                        if (_selectedCategory == null)
+                          _buildEmptyState()
+                        else
+                          _buildCalculatorContent(),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              // Bottom AdMob Placeholder Banner
+              _buildAdBanner(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
