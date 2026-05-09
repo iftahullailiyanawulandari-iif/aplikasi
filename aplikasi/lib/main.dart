@@ -235,3 +235,47 @@ class _AgriCalcMainScreenState extends State<AgriCalcMainScreen> {
     );
   }
 
+  Widget _buildEmptyState() {
+    return Column(
+      children: [
+        const SizedBox(height: 20),
+        _buildIllustrationPlaceholder(),
+        const SizedBox(height: 40),
+        SizedBox(
+          width: double.infinity,
+          child: ElevatedButton(
+            onPressed: () {
+              // Highlight the first category automatically
+              _onCategoryChanged('Luas Lahan');
+            },
+            style: ElevatedButton.styleFrom(
+              padding: EdgeInsets.zero,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30), // Pill shaped button
+              ),
+              elevation: 6,
+              shadowColor: const Color(0xFF2E7D32).withOpacity(0.4),
+            ),
+            child: Ink(
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                  colors: [Color(0xFF388E3C), Color(0xFF1B5E20)],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                ),
+                borderRadius: BorderRadius.circular(30),
+              ),
+              child: Container(
+                constraints: const BoxConstraints(minHeight: 56),
+                alignment: Alignment.center,
+                child: const Text(
+                  'Pilih Kategori',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
