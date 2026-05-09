@@ -326,3 +326,48 @@ Widget _buildIllustrationPlaceholder() {
       ),
     );
   }
+Widget _buildAdBanner() {
+    return Container(
+      width: double.infinity,
+      height: 60,
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        border: Border(
+          top: BorderSide(color: Colors.black12, width: 1),
+        ),
+      ),
+      child: Center(
+        child: Container(
+          width: 32,
+          height: 32,
+          decoration: BoxDecoration(
+            color: Colors.amber.shade100,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Positioned(
+                left: 6, top: 8,
+                child: Container(width: 12, height: 12, decoration: BoxDecoration(color: Colors.red.shade400, borderRadius: BorderRadius.circular(4))),
+              ),
+              Positioned(
+                right: 6, bottom: 8,
+                child: Container(width: 12, height: 12, decoration: BoxDecoration(color: Colors.blue.shade400, borderRadius: BorderRadius.circular(4))),
+              ),
+              Positioned(
+                left: 8, bottom: 6,
+                child: Container(width: 8, height: 8, decoration: BoxDecoration(color: Colors.yellow.shade600, shape: BoxShape.circle)),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCalculatorContent() {
+    return Column(
+      children: [
+        // Input Card
+        _buildInputCard(),
