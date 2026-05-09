@@ -494,3 +494,69 @@ Widget _buildAdBanner() {
       ),
     );
   }
+ Widget _buildOutputCard() {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.06),
+            blurRadius: 16,
+            spreadRadius: -2,
+            offset: const Offset(0, 8),
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          // Output Box
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            child: Text(
+              _outputValue.toStringAsFixed(2).replaceAll(RegExp(r'\.00$'), ''),
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 44,
+                fontWeight: FontWeight.w700,
+                letterSpacing: -1,
+                color: Colors.black87,
+              ),
+            ),
+          ),
+          const SizedBox(height: 8),
+          // Dropdown
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            decoration: BoxDecoration(
+              color: const Color(0xFFF2F5F1),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton<String>(
+                isExpanded: true,
+                value: _currentOutputUnits.contains(_toUnit) ? _toUnit : _currentOutputUnits.first,
+                icon: const Icon(Icons.arrow_drop_down, color: Colors.black54),
+                items: _currentOutputUnits.map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
+                  );
+                }).toList(),
+                onChanged: (newValue) {
+                  if (newValue != null) {
+                    setState(() {
+                      _toUnit = newValue;
+                      _calculate();
+                    });
+                  }
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
