@@ -371,3 +371,126 @@ Widget _buildAdBanner() {
       children: [
         // Input Card
         _buildInputCard(),
+         // Swap Icon and Equals Sign
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16.0),
+          child: Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(Icons.arrow_downward, size: 20, color: Colors.black54),
+                const SizedBox(width: 12),
+                _selectedCategory == 'Luas Lahan'
+                    ? const Text(
+                        '=',
+                        style: TextStyle(fontSize: 28, fontWeight: FontWeight.w600, color: Colors.black54),
+                      )
+                    : const Icon(Icons.calculate_outlined, size: 28, color: Colors.black54),
+                const SizedBox(width: 12),
+                const Icon(Icons.arrow_upward, size: 20, color: Colors.black54),
+              ],
+            ),
+          ),
+        ),
+        
+        // Output Card
+        _buildOutputCard(),
+        
+        const SizedBox(height: 32),
+        
+        // Dynamic Bottom Section
+        if (_selectedCategory == 'Luas Lahan') ...[
+          _buildQuickCard('1 Hektar', '7041 m2'),
+          const SizedBox(height: 12),
+          _buildQuickCard('1 Bahu', '0.7 Hektar'),
+        ] else if (_selectedCategory == 'Takaran Pupuk') ...[
+          _buildFiturRasioCard(),
+        ],
+      ],
+    );
+  }
+
+  Widget _buildInputCard() {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.06),
+            blurRadius: 16,
+            spreadRadius: -2,
+            offset: const Offset(0, 8),
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          // Input Box
+          Container(
+            decoration: const BoxDecoration(
+              color: Color(0xFFF2F5F1),
+              borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
+            ),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 16, right: 16, top: 12, bottom: 4),
+                  child: TextField(
+                    controller: _inputController,
+                    keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontSize: 44, fontWeight: FontWeight.w600, letterSpacing: -1),
+                    decoration: const InputDecoration(
+                      border: InputBorder.none,
+                      isDense: true,
+                      contentPadding: EdgeInsets.zero,
+                    ),
+                  ),
+                ),
+                Container(
+                  height: 3,
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Color(0xFF388E3C), Color(0xFF1B5E20)],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 16),
+          // Dropdown
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            decoration: BoxDecoration(
+              color: const Color(0xFFF2F5F1),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton<String>(
+                isExpanded: true,
+                value: _currentInputUnits.contains(_fromUnit) ? _fromUnit : _currentInputUnits.first,
+                icon: const Icon(Icons.arrow_drop_down, color: Colors.black54),
+                items: _currentInputUnits.map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
+                  );
+                }).toList(),
+                onChanged: (newValue) {
+                  if (newValue != null) {
+                    setState(() {
+                      _fromUnit = newValue;
+                      _calculate();
+                    });
+                  }
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
