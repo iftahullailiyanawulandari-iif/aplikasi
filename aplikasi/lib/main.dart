@@ -279,3 +279,50 @@ class _AgriCalcMainScreenState extends State<AgriCalcMainScreen> {
       ],
     );
   }
+Widget _buildIllustrationPlaceholder() {
+    return SizedBox(
+      height: 250,
+      width: double.infinity,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          // Decorative background circle
+          Container(
+            width: 140,
+            height: 140,
+            decoration: BoxDecoration(
+              color: const Color(0xFF2E7D32).withOpacity(0.08),
+              shape: BoxShape.circle,
+            ),
+          ),
+          // Center Farmer
+          const Icon(Icons.nature_people_outlined, size: 100, color: Color(0xFF1B5E20)),
+          // Surrounding tool icons
+          Positioned(
+            top: 40,
+            left: 50,
+            child: Icon(Icons.calculate_outlined, size: 36, color: const Color(0xFF2E7D32)),
+          ),
+          Positioned(
+            bottom: 40,
+            right: 50,
+            child: Icon(Icons.scale_outlined, size: 36, color: const Color(0xFF2E7D32)),
+          ),
+          Positioned(
+            top: 50,
+            right: 60,
+            child: Icon(Icons.bar_chart, size: 36, color: const Color(0xFF2E7D32)),
+          ),
+          Positioned(
+            bottom: 60,
+            left: 60,
+            child: Icon(Icons.speed_outlined, size: 36, color: const Color(0xFF2E7D32)),
+          ),
+          // A few connecting dots/lines (simplified as small dots)
+          Positioned(top: 100, left: 100, child: Container(width: 4, height: 4, decoration: const BoxDecoration(color: Colors.black26, shape: BoxShape.circle))),
+          Positioned(bottom: 90, right: 110, child: Container(width: 4, height: 4, decoration: const BoxDecoration(color: Colors.black26, shape: BoxShape.circle))),
+          Positioned(top: 80, right: 100, child: Container(width: 4, height: 4, decoration: const BoxDecoration(color: Colors.black26, shape: BoxShape.circle))),
+        ],
+      ),
+    );
+  }
