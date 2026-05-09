@@ -137,3 +137,80 @@ class _AgriCalcMainScreenState extends State<AgriCalcMainScreen> {
       return ['Kilogram (kg)', 'Gram (g)', 'Ton'];
     }
   }
+@override
+  void dispose() {
+    _inputController.dispose();
+    _ratioDoseController.dispose();
+    _ratioWaterController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white, // Base background
+      body: SafeArea(
+        child: Container(
+          // Subtle elegant background gradient
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [Color(0xFFF4F7F4), Color(0xFFE8EFE7)],
+            ),
+          ),
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 24.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Header
+                        Text(
+                          'AgriCalc',
+                          style: TextStyle(
+                            fontSize: 26,
+                            fontWeight: FontWeight.w700,
+                            letterSpacing: -0.5,
+                            color: const Color(0xFF1B5E20),
+                          ),
+                        ),
+                        const SizedBox(height: 24),
+                        
+                        // Categories
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: _categories.map((category) {
+                              bool isSelected = _selectedCategory == category;
+                              return Padding(
+                                padding: const EdgeInsets.only(right: 10.0),
+                                child: ChoiceChip(
+                                  label: Text(category),
+                                  selected: isSelected,
+                                  onSelected: (selected) {
+                                    if (selected) _onCategoryChanged(category);
+                                  },
+                                  showCheckmark: false,
+                                  selectedColor: const Color(0xFF2E7D32),
+                                  backgroundColor: Colors.white,
+                                  elevation: isSelected ? 4 : 0,
+                                  shadowColor: const Color(0xFF2E7D32).withOpacity(0.3),
+                                  labelStyle: TextStyle(
+                                    color: isSelected ? Colors.white : Colors.black87,
+                                    fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    side: BorderSide(
+                                      color: isSelected ? Colors.transparent : Colors.grey.shade300,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }).toList(),
+                          ),
+                        ),
