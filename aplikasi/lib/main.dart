@@ -560,3 +560,140 @@ Widget _buildAdBanner() {
       ),
     );
   }
+  Widget _buildQuickCard(String from, String to) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.04),
+            blurRadius: 12,
+            spreadRadius: -2,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(
+              from, 
+              textAlign: TextAlign.center, 
+              style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: Colors.black87)
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(4),
+            decoration: BoxDecoration(
+              color: const Color(0xFFF2F5F1),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: const Icon(Icons.arrow_forward, size: 16, color: Color(0xFF2E7D32)),
+          ),
+          Expanded(
+            child: Text(
+              to, 
+              textAlign: TextAlign.center, 
+              style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: Colors.black87)
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildFiturRasioCard() {
+    return Container(
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.06),
+            blurRadius: 16,
+            spreadRadius: -2,
+            offset: const Offset(0, 8),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Fitur Rasio',
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Color(0xFF1B5E20)),
+          ),
+          const SizedBox(height: 20),
+          Row(
+            children: [
+              const SizedBox(width: 8),
+              // Spoon icon placeholder
+              Container(
+                width: 44,
+                height: 44,
+                decoration: BoxDecoration(
+                  color: const Color(0xFFF2F5F1),
+                  borderRadius: BorderRadius.circular(22),
+                ),
+                child: const Icon(Icons.science_outlined, color: Color(0xFF2E7D32), size: 24),
+              ),
+              const SizedBox(width: 12),
+              // Bracket connection
+              Container(
+                width: 16,
+                height: 56,
+                decoration: const BoxDecoration(
+                  border: Border(
+                    top: BorderSide(color: Colors.black12, width: 2),
+                    bottom: BorderSide(color: Colors.black12, width: 2),
+                    left: BorderSide(color: Colors.black12, width: 2),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 16),
+              // Inputs
+              Expanded(
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        _buildSmallInput(_ratioDoseController),
+                        const SizedBox(width: 12),
+                        const Text('mL per', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.black87)),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    Row(
+                      children: [
+                        _buildSmallInput(_ratioWaterController),
+                        const SizedBox(width: 12),
+                        const Text('Liter Air', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.black87)),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 24),
+          // Output Kebutuhan
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(vertical: 14),
+            decoration: BoxDecoration(
+              color: const Color(0xFFF2F5F1),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Text(
+              'Kebutuhan: ${_calculateKebutuhan()} mL Pupuk',
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16, color: Color(0xFF1B5E20)),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
